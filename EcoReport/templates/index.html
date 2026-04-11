@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoReport</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>EcoReport</h1>
+            <p>Plataforma de denúncia e monitoramento ambiental</p>
+            <p class="hero-subtext">
+                Registre problemas ambientais da sua cidade e acompanhe tudo em um mapa interativo.
+            </p>
+
+            <div class="hero-buttons">
+                <a class="botao" href="/reportar">Registrar Problema</a>
+                <a class="botao botao-secundario" href="/mapa">Ver Mapa</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="secao">
+            <h2>Sobre o projeto</h2>
+            <p class="texto-centralizado">
+                O EcoReport permite que cidadãos registrem ocorrências ambientais como lixo acumulado,
+                bueiros entupidos, esgoto a céu aberto e áreas degradadas. As denúncias ficam registradas
+                e podem ser visualizadas em um mapa, ajudando no monitoramento e na conscientização ambiental.
+            </p>
+        </section>
+
+        <section class="secao">
+            <h2>Estatísticas rápidas</h2>
+            <div class="cards">
+                <div class="card">
+                    <h3>{{ total }}</h3>
+                    <p>Denúncias registradas</p>
+                </div>
+
+                <div class="card">
+                    <h3>4</h3>
+                    <p>Tipos de problemas monitorados</p>
+                </div>
+
+                <div class="card">
+                    <h3>ODS 11</h3>
+                    <p>Cidades e comunidades sustentáveis</p>
+                </div>
+
+                <div class="card">
+                    <h3>ODS 13</h3>
+                    <p>Ação contra a mudança do clima</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="secao">
+            <h2>Tipos de problemas que podem ser registrados</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="icone">🗑️</div>
+                    <h3>Lixo acumulado</h3>
+                    <p>Locais com descarte irregular de resíduos ou acúmulo de lixo.</p>
+                </div>
+
+                <div class="card">
+                    <div class="icone">🚧</div>
+                    <h3>Bueiro entupido</h3>
+                    <p>Pontos com risco de alagamento ou obstrução da drenagem urbana.</p>
+                </div>
+
+                <div class="card">
+                    <div class="icone">🌳</div>
+                    <h3>Área degradada</h3>
+                    <p>Ambientes afetados por descarte, erosão, desmatamento ou abandono.</p>
+                </div>
+
+                <div class="card">
+                    <div class="icone">💧</div>
+                    <h3>Esgoto a céu aberto</h3>
+                    <p>Situações que prejudicam a saúde pública e o meio ambiente.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="secao">
+            <h2>Como funciona</h2>
+            <div class="passos">
+                <div class="passo">
+                    <span>1</span>
+                    <h3>Registre</h3>
+                    <p>Informe o tipo do problema ambiental encontrado.</p>
+                </div>
+
+                <div class="passo">
+                    <span>2</span>
+                    <h3>Localize</h3>
+                    <p>Use endereço, CEP ou o mapa para indicar o local.</p>
+                </div>
+
+                <div class="passo">
+                    <span>3</span>
+                    <h3>Envie</h3>
+                    <p>Adicione uma descrição simples da situação observada.</p>
+                </div>
+
+                <div class="passo">
+                    <span>4</span>
+                    <h3>Acompanhe</h3>
+                    <p>Visualize as denúncias registradas diretamente no mapa.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="secao destaque-final">
+            <h2>Participe da melhoria da sua cidade</h2>
+            <p>
+                Sua denúncia pode ajudar no monitoramento ambiental e na conscientização da comunidade.
+            </p>
+            <a class="botao" href="/reportar">Fazer uma denúncia</a>
+        </section>
+
+    </main>
+
+    <footer class="rodape">
+        <p><strong>EcoReport</strong> — Plataforma de Denúncia e Monitoramento Ambiental</p>
+        <p>Projeto acadêmico com foco em inovação, sustentabilidade e impacto social.</p>
+        <p>ODS 11 — Cidades Sustentáveis | ODS 13 — Ação Climática</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,388 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #eef2f1;
+    color: #1f2937;
+    line-height: 1.6;
+}
+
+/* HERO / TOPO */
+
+.hero {
+    background: linear-gradient(135deg, #2c7a7b, #2f855a);
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 52px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.hero-subtext {
+    max-width: 700px;
+    margin: 0 auto 25px auto;
+    font-size: 18px;
+    opacity: 0.95;
+}
+
+.hero-buttons {
+    margin-top: 25px;
+}
+
+/* CONTAINER */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+}
+
+.secao {
+    margin-bottom: 50px;
+}
+
+.secao h2 {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #14532d;
+}
+
+.texto-centralizado {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 18px;
+    color: #374151;
+}
+
+/* CARDS */
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+    width: 250px;
+    min-height: 170px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h3 {
+    font-size: 26px;
+    color: #2c7a7b;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #4b5563;
+    font-size: 15px;
+}
+
+.icone {
+    font-size: 42px;
+    margin-bottom: 12px;
+}
+
+/* PASSOS */
+
+.passos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.passo {
+    background: white;
+    width: 240px;
+    border-radius: 14px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.passo span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #2c7a7b;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 12px;
+    font-size: 18px;
+}
+
+.passo h3 {
+    margin-bottom: 10px;
+    color: #14532d;
+}
+
+/* SEÇÃO FINAL */
+
+.destaque-final {
+    background: white;
+    border-radius: 16px;
+    padding: 35px 20px;
+    text-align: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.destaque-final p {
+    margin-bottom: 20px;
+    color: #4b5563;
+    font-size: 17px;
+}
+
+/* BOTÕES */
+
+.botao {
+    display: inline-block;
+    padding: 12px 22px;
+    margin: 8px;
+    background: #2c7a7b;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background 0.2s ease;
+}
+
+.botao:hover {
+    background: #256b6c;
+}
+
+.botao-secundario {
+    background: #14532d;
+}
+
+.botao-secundario:hover {
+    background: #0f3f22;
+}
+
+/* RODAPÉ */
+
+.rodape {
+    background: #1f2937;
+    color: white;
+    text-align: center;
+    padding: 25px 20px;
+    font-size: 14px;
+}
+
+.rodape p {
+    margin: 5px 0;
+}
+
+/* FORMULÁRIO */
+
+form {
+    max-width: 700px;
+    margin: 30px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+form label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #14532d;
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+form button {
+    margin-top: 18px;
+    padding: 12px 18px;
+    background: #2c7a7b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+form button:hover {
+    background: #256b6c;
+}
+
+/* TÍTULOS */
+
+h2 {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+/* MAPA */
+
+#map {
+    max-width: 1000px;
+    margin: 20px auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* LINK VOLTAR ANTIGO */
+
+a[href="/"] {
+    display: inline-block;
+    margin: 20px;
+    color: #2c7a7b;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a[href="/"]:hover {
+    text-decoration: underline;
+}
+
+/* CAIXA DO BOTÃO VOLTAR */
+
+.voltar-box {
+    text-align: center;
+    margin: 40px auto;
+    padding: 20px;
+    max-width: 500px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+/* FRASE AMBIENTAL */
+
+.frase-ambiental {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 20px;
+    font-style: italic;
+    color: #2c7a7b;
+    font-size: 16px;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 768px) {
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .hero p,
+    .hero-subtext {
+        font-size: 16px;
+    }
+
+    .secao h2 {
+        font-size: 26px;
+    }
+
+    .card,
+    .passo {
+        width: 100%;
+        max-width: 330px;
+    }
+
+    .mapa-container{
+    text-align:center;
+    margin-top:40px;
+}
+
+.titulo-mapa{
+    font-size:32px;
+    color:#14532d;
+    margin-bottom:10px;
+}
+
+.subtitulo-mapa{
+    color:#4b5563;
+    margin-bottom:25px;
+}
+
+.mapa-box{
+    width:100%;
+    max-width:1000px;
+    margin:auto;
+    background:white;
+    padding:15px;
+    border-radius:12px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.08);
+}
+
+#map{
+    height:500px;
+    border-radius:10px;
+}
+
+.voltar-area{
+    text-align:center;
+    margin-top:35px;
+}
+
+.botao-voltar{
+    display:inline-block;
+    background:#2c7a7b;
+    color:white;
+    padding:12px 25px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.botao-voltar:hover{
+    background:#256b6c;
+}
+
+.frase-ambiental{
+    margin-top:40px;
+    text-align:center;
+    color:#2c7a7b;
+    font-style:italic;
+}
+}

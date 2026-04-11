@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Mapa Ambiental</title>
+
+<link rel="stylesheet" href="/static/style.css">
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<style>
+#map { height:500px; margin-bottom: 20px; }
+.lista-denuncias {
+    max-width: 1100px;
+    margin: 0 auto 30px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+}
+.card-denuncia {
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    padding: 16px;
+}
+.card-denuncia img {
+    width: 100%;
+    max-height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Mapa de Problemas Ambientais</h2>
+
+<div id="map"></div>
+
+<script>
+var map = L.map('map').setView([-23.55, -46.63], 12);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+ attribution:'OpenStreetMap'
+}).addTo(map);
+</script>
+
+{% for d in denuncias %}
+<script>
+var popup{{ d.id }} = `
+    <b>{{ d.tipo|e }}</b><br>
+    {{ d.localizacao|e }}<br>
+    {{ d.descricao|default('', true)|e }}
+    {% if d.imagem %}
+        <br><img src="/{{ d.imagem }}" alt="Imagem da denúncia" style="margin-top:8px; width:200px; max-width:100%; border-radius:8px;">
+    {% endif %}
+`;
+
+L.marker([{{ d.latitude if d.latitude is not none else -23.55 }}, {{ d.longitude if d.longitude is not none else -46.63 }}]).addTo(map)
+.bindPopup(popup{{ d.id }});
+</script>
+{% endfor %}
+
+<div class="lista-denuncias">
+{% for d in denuncias %}
+    <div class="card-denuncia">
+        <h3>{{ d.tipo }}</h3>
+        <p><strong>Local:</strong> {{ d.localizacao }}</p>
+        <p><strong>Descrição:</strong> {{ d.descricao }}</p>
+        {% if d.imagem %}
+            <img src="/{{ d.imagem }}" alt="Imagem da denúncia">
+        {% else %}
+            <p><em>Sem imagem anexada.</em></p>
+        {% endif %}
+    </div>
+{% endfor %}
+</div>
+
+<div class="voltar-box">
+    <a class="botao" href="/">⬅ Voltar para página inicial</a>
+</div>
+
+<footer class="frase-ambiental">
+    🌱 Pequenas ações geram grandes mudanças. Denunciar problemas ambientais é um passo para cidades mais sustentáveis.
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Problema</title>
+    <link rel="stylesheet" href="/static/style.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <style>
+        #map {
+            height: 320px;
+            margin-top: 15px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Registrar problema ambiental</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+        <label>Tipo do problema</label>
+        <select name="tipo" required>
+            <option value="">Selecione</option>
+            <option value="Lixo acumulado">Lixo acumulado</option>
+            <option value="Bueiro entupido">Bueiro entupido</option>
+            <option value="Área degradada">Área degradada</option>
+            <option value="Esgoto a céu aberto">Esgoto a céu aberto</option>
+        </select>
+
+        <label>CEP</label>
+        <input type="text" id="cep" name="cep" placeholder="Ex: 01001000">
+
+        <label>Endereço / Logradouro</label>
+        <input type="text" id="endereco" name="localizacao" placeholder="Ex: Praça da Sé, São Paulo" required>
+
+        <label>Descrição</label>
+        <textarea name="descricao" rows="4" placeholder="Descreva o problema"></textarea>
+
+        <input type="hidden" id="latitude" name="latitude">
+        <input type="hidden" id="longitude" name="longitude">
+
+        <label>Adicionar imagem</label>
+        <input type="file" name="imagem" accept="image/*">
+
+        <button type="button" onclick="buscarCep()">Buscar pelo CEP</button>
+        <button type="button" onclick="buscarEndereco()">Buscar pelo endereço</button>
+        <button type="submit">Enviar denúncia</button>
+    </form>
+
+    <p id="mensagem"></p>
+
+    <h3>Mapa</h3>
+    <div id="map"></div>
+
+    <a href="/">Voltar</a>
+</div>
+
+<script>
+    var map = L.map('map').setView([-23.5505, -46.6333], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    var marcador = null;
+
+    function atualizarMapa(lat, lon, texto) {
+        document.getElementById("latitude").value = lat;
+        document.getElementById("longitude").value = lon;
+
+        map.setView([lat, lon], 16);
+
+        if (marcador) {
+            map.removeLayer(marcador);
+        }
+
+        marcador = L.marker([lat, lon]).addTo(map)
+            .bindPopup(texto)
+            .openPopup();
+    }
+
+    async function buscarCep() {
+        const cep = document.getElementById("cep").value.replace(/\D/g, "");
+        const mensagem = document.getElementById("mensagem");
+
+        if (cep.length !== 8) {
+            mensagem.innerText = "Digite um CEP com 8 números.";
+            return;
+        }
+
+        try {
+            const respostaCep = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+            const dadosCep = await respostaCep.json();
+
+            if (dadosCep.erro) {
+                mensagem.innerText = "CEP não encontrado.";
+                return;
+            }
+
+            const enderecoMontado = `${dadosCep.logradouro}, ${dadosCep.bairro}, ${dadosCep.localidade}, ${dadosCep.uf}, Brasil`;
+            document.getElementById("endereco").value = enderecoMontado;
+
+            mensagem.innerText = "CEP encontrado. Buscando localização no mapa...";
+
+            const respostaGeo = await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&q=${encodeURIComponent(enderecoMontado)}`);
+            const dadosGeo = await respostaGeo.json();
+
+            if (dadosGeo.length === 0) {
+                mensagem.innerText = "Endereço encontrado, mas não consegui localizar no mapa.";
+                return;
+            }
+
+            const lat = parseFloat(dadosGeo[0].lat);
+            const lon = parseFloat(dadosGeo[0].lon);
+
+            atualizarMapa(lat, lon, enderecoMontado);
+            mensagem.innerText = "Localização encontrada com sucesso.";
+        } catch (erro) {
+            mensagem.innerText = "Erro ao buscar o CEP.";
+            console.error(erro);
+        }
+    }
+
+    async function buscarEndereco() {
+        const endereco = document.getElementById("endereco").value.trim();
+        const mensagem = document.getElementById("mensagem");
+
+        if (!endereco) {
+            mensagem.innerText = "Digite um endereço.";
+            return;
+        }
+
+        try {
+            const respostaGeo = await fetch(`https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&q=${encodeURIComponent(endereco)}`);
+            const dadosGeo = await respostaGeo.json();
+
+            if (dadosGeo.length === 0) {
+                mensagem.innerText = "Endereço não encontrado.";
+                return;
+            }
+
+            const lat = parseFloat(dadosGeo[0].lat);
+            const lon = parseFloat(dadosGeo[0].lon);
+
+            atualizarMapa(lat, lon, dadosGeo[0].display_name);
+
+            if (dadosGeo[0].address && dadosGeo[0].address.postcode) {
+                document.getElementById("cep").value = dadosGeo[0].address.postcode;
+            }
+
+            mensagem.innerText = "Endereço localizado com sucesso.";
+        } catch (erro) {
+            mensagem.innerText = "Erro ao buscar o endereço.";
+            console.error(erro);
+        }
+    }
+
+    map.on('click', function(e) {
+        const lat = e.latlng.lat;
+        const lon = e.latlng.lng;
+        atualizarMapa(lat, lon, "Local marcado manualmente");
+        document.getElementById("mensagem").innerText = "Ponto marcado manualmente no mapa.";
+    });
+</script>
+
+</body>
+</html>
