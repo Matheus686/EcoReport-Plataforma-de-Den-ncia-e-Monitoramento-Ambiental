@@ -1,5 +1,5 @@
-EcoReport/database.db
-EcoReport/static/uploads/
+database.db
+static/uploads/
 __pycache__/
 *.pyc
 venv/
