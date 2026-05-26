@@ -20,6 +20,9 @@ CREATE TABLE IF NOT EXISTS denuncias (
 cursor.execute("PRAGMA table_info(denuncias)")
 colunas = [coluna[1] for coluna in cursor.fetchall()]
 
+if "cep" not in colunas:
+    cursor.execute("ALTER TABLE denuncias ADD COLUMN cep TEXT")
+
 if "imagem" not in colunas:
     cursor.execute("ALTER TABLE denuncias ADD COLUMN imagem TEXT")
 

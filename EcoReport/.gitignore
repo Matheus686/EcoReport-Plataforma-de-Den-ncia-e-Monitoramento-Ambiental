@@ -1,0 +1,6 @@
+EcoReport/database.db
+EcoReport/static/uploads/
+__pycache__/
+*.pyc
+venv/
+.env
